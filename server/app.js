@@ -13,17 +13,17 @@ app.get('/notes', function (req, res) {
     {
       id: 1,
       username: 'Kasia',
-      note: 'Hello'
+      note: 'This is first blog post or any other type of note with more words inside to show some content.'
     },
     {
       id: 2,
       username: 'Thomas',
-      note: 'Updated note'
+      note: 'Hello! This is another blog post to show even more content inside, look how beautiful I am! Wonderful! We are going to rock'
     },
     {
       id: 3,
       username: 'Freddy',
-      note: 'Hello!!'
+      note: 'Well, Im out of ideas, so my blog post will be pretty short'
     }
   ])
 })

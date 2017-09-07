@@ -14,5 +14,10 @@ export default {
       ],
       status: 'ready'
     }
+  },
+  post: {
+    data: {
+      id: 0,
+    }
   }
 }

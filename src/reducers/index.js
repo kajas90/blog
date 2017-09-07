@@ -1,8 +1,8 @@
 // Root reducer setup
 import { combineReducers } from 'redux-immutable'
-import { routerReducer } from 'react-router-redux';
 
 import PostsReducer from './Posts'
-const rootReducer = combineReducers({posts: PostsReducer });
+import PostReducer from './Post'
+const rootReducer = combineReducers({posts: PostsReducer, post: PostReducer });
 
 export default rootReducer;

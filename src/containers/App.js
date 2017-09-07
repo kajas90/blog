@@ -8,10 +8,10 @@ import AppTitle from 'components/AppTitle'
 import Menu from 'components/Menu'
 
 // import components from react-router-dom if needed
-import Posts from './Posts'
+import MainPage from './MainPage'
 
 const Wrapper = styled.div`
-  font-family: 'Open Sans';
+  font-size: 12px;
 `
 
 class App extends React.Component {
@@ -28,7 +28,7 @@ class App extends React.Component {
           </Menu>
         </Header>
         <Switch>
-          <Route exact path="/" component={Posts} />
+          <Route exact path="/" component={MainPage} />
         </Switch>
       </Wrapper>
     );

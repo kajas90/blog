@@ -7,22 +7,13 @@ import PostItem from '../../components/PostItem'
 
 const PostsWrapper = styled.section`
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-`
-
-const Column = styled.div`
-  display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 50%;
 `
 
-const PostsList = ({posts}) =>
+const PostsList = ({posts, selectPost}) =>
       <PostsWrapper>
-        <Column>
-          {posts.map((post, index) => (<PostItem key={post.id+index} post={post} />))}
-        </Column>
+          {posts.map((post, index) => (<PostItem key={post.id+index} post={post} selectPost={selectPost} />))}
       </PostsWrapper>
 
 PostsList.propTypes = {
@@ -31,6 +22,7 @@ PostsList.propTypes = {
     note: PropTypes.string,
     username: PropTypes.string,
   })),
+  selectPost: PropTypes.func,
 }
 
 export default PostsList

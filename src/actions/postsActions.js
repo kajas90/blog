@@ -14,3 +14,13 @@ export const getPostsSuccess = (posts) => ({
   posts
 })
 
+
+export const getPost = id => ({
+  type: types.GET_POST,
+  id
+})
+
+export const selectPost = id => ({
+  type: types.SELECT_POST,
+  id
+})

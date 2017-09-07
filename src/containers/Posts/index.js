@@ -3,14 +3,17 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components'
 import { connect } from 'react-redux';
 
-import { toJS } from 'immutable';
-
-import { getPosts } from 'actions/postsActions';
+import { getPosts, selectPost } from 'actions/postsActions';
 import PostsList from 'components/Posts';
-
-const PageWrapper = styled.section`
+const PageWrapper = styled.div`
   position: relative;
   padding: 20px;
+  flex-grow: 1;
+  -webkit-transition: all 300ms ease-in-out;
+  -moz-transition: all 300ms ease-in-out;
+  -ms-transition: all 300ms ease-in-out;
+  -o-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
 `
 
 const Loader = styled.div `
@@ -21,7 +24,7 @@ const Loader = styled.div `
   justify-content: center;
   width: 100%;
   height: 100%;
-  background: #fff;
+  background: #fafafa;
   
   & > span {
     animation: blinker 1s linear infinite;
@@ -39,10 +42,10 @@ export class Posts extends React.Component {
   }
 
   render() {
-    const { status, posts } = this.props;
+    const { status, posts, selectPost } = this.props;
     return (
       <PageWrapper>
-        <PostsList posts={posts} />
+        <PostsList posts={posts} selectPost={selectPost} />
         {status === 'loading' && <Loader><span>{status}</span></Loader>}
       </PageWrapper>
     );
@@ -56,16 +59,18 @@ Posts.propTypes = {
     note: PropTypes.string,
     username: PropTypes.string,
   })),
-  requestPosts: PropTypes.func
+  selectPost: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
   status: state.getIn(['posts','list','status']),
-  posts: state.getIn(['posts','list','data']).toJS()
+  posts: state.getIn(['posts','list','data']).toJS(),
+
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  requestPosts: () => dispatch(getPosts())
+  requestPosts: () => dispatch(getPosts()),
+  selectPost: id => dispatch(selectPost(id)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);
