@@ -9,7 +9,7 @@ export const getPostsError = (error) => ({
   error
 })
 
-export const getPostsSuccess = (notes) => ({
+export const getPostsSuccess = (posts) => ({
   type: types.GET_POSTS_SUCCESS,
   posts
 })

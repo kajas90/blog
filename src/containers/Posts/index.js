@@ -53,7 +53,8 @@ Posts.propTypes = {
   status: PropTypes.string,
   posts: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
-    note: PropTypes.string
+    note: PropTypes.string,
+    username: PropTypes.string,
   })),
   requestPosts: PropTypes.func
 };

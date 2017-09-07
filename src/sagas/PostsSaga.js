@@ -18,5 +18,5 @@ export function* refreshPostsSaga() {
 
 
 export default function* PostsSaga() {
-  yield takeLatest(GET_NOTES, refreshPostsSaga);
+  yield takeLatest(GET_POSTS, refreshPostsSaga);
 }

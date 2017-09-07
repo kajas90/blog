@@ -12,14 +12,17 @@ app.get('/notes', function (req, res) {
   res.send([
     {
       id: 1,
+      username: 'Kasia',
       note: 'Hello'
     },
     {
       id: 2,
+      username: 'Thomas',
       note: 'Updated note'
     },
     {
       id: 3,
+      username: 'Freddy',
       note: 'Hello!!'
     }
   ])
