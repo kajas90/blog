@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { getPost, selectPost } from 'actions/postsActions';
 
-import { selectComments, selectUsers } from '../../selectors/commentsSelector'
+import { selectComments, selectUsers, selectTags } from '../../selectors/commentsSelector'
 
 import BoxElement from '../../components/BoxElement'
 import Comments from '../../components/Comments'
@@ -88,7 +88,7 @@ export class Post extends React.Component {
   }
 
   render() {
-    const { post, comments, closePost, users } = this.props;
+    const { post, comments, closePost, users, tags } = this.props;
     return (
       <PageWrapper>
         {post.note &&
@@ -106,7 +106,7 @@ export class Post extends React.Component {
         </SinglePostWrapper>
         }
 
-        {this.state.showForm && <CommentForm users={users} />}
+        {this.state.showForm && <CommentForm users={users} tags={tags} />}
 
         {comments && <Comments comments={comments}/>}
 
@@ -130,7 +130,8 @@ Post.propTypes = {
   })),
   requestPosts: PropTypes.func,
   closePost: PropTypes.func,
-  users: PropTypes.arrayOf(PropTypes.string)
+  users: PropTypes.arrayOf(PropTypes.string),
+  tags: PropTypes.arrayOf(PropTypes.string)
 };
 
 
@@ -138,7 +139,8 @@ const mapStateToProps = (state) => ({
   status: state.getIn(['post', 'status']),
   post: state.getIn(['post','data']).toJS(),
   comments: selectComments(state, 0),
-  users: selectUsers(state)
+  users: selectUsers(state),
+  tags: selectTags(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

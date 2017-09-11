@@ -61,7 +61,7 @@ let comments = [
     parent: 0,
     id: 1,
     author: 'Kate',
-    content: 'Well post!'
+    content: 'Well post! #tech #cats #dogs #sometag'
   },
   {
     postId: 3,

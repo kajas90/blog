@@ -60,7 +60,7 @@ class CommentForm extends React.Component {
 
   handleChange(e) {
     const suggestions = this.suggestUser(e.target.value, this.props.users);
-    const tagsSuggestions = this.suggestTag(e.target.value);
+    const tagsSuggestions = this.suggestTag(e.target.value, this.props.tags);
     this.setState({suggestions: suggestions, tagSuggestions: tagsSuggestions, text: e.target.value})
   }
 
@@ -74,7 +74,7 @@ class CommentForm extends React.Component {
     }
   }
 
-  suggestTag(text, tags = ['dog','cat','tech']) {
+  suggestTag(text, tags = []) {
     const regex = /#([a-zA-Z]*)$/g;
     const result = regex.exec(text)
     if(result) {
@@ -113,7 +113,8 @@ class CommentForm extends React.Component {
 }
 
 CommentForm.propTypes = {
-  users: PropTypes.arrayOf(PropTypes.string)
+  users: PropTypes.arrayOf(PropTypes.string),
+  tags: PropTypes.arrayOf(PropTypes.string)
 }
 
 export default CommentForm
