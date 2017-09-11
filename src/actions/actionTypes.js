@@ -8,3 +8,5 @@ export const GET_POST_ERROR = 'GET_POST_ERROR';
 
 
 export const SELECT_POST = 'SELECT_POST';
+
+export const ADD_COMMENT = 'ADD_COMMENT';

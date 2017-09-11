@@ -34,3 +34,8 @@ export const getPostSuccess = (post) => ({
   type: types.GET_POST_SUCCESS,
   post
 })
+
+export const addComment = text => ({
+  type: types.ADD_COMMENT,
+  text
+})

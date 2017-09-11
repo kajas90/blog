@@ -1,8 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
-import Suggestion from '../../components/Suggestion'
+import { selectUsers, selectTags } from '../../selectors/commentsSelector';
+import { findLastUsername, findLastTag } from '../../regexes'
+
+import { addComment } from 'actions/postsActions';
+
+import Suggestion from '../../components/Suggestion';
 
 
 const Form = styled.form`
@@ -54,8 +60,16 @@ class CommentForm extends React.Component {
     }
   }
 
-  handleSubmit() {
-
+  handleSubmit(e) {
+    e.preventDefault();
+    if(this.state.text.length > 0) {
+      this.props.addComment(this.state.text);
+      this.setState({
+        suggestions: [],
+        tagSuggestions: [],
+        text: ''
+      })
+    }
   }
 
   handleChange(e) {
@@ -65,8 +79,7 @@ class CommentForm extends React.Component {
   }
 
   suggestUser(text, users) {
-    const regex = /@([a-zA-Z]*)$/g;
-    const result = regex.exec(text)
+    const result = findLastUsername.exec(text)
     if(result) {
       return users.filter(item => item.indexOf(result[1]) > -1)
     } else {
@@ -75,8 +88,7 @@ class CommentForm extends React.Component {
   }
 
   suggestTag(text, tags = []) {
-    const regex = /#([a-zA-Z]*)$/g;
-    const result = regex.exec(text)
+    const result = findLastTag.exec(text)
     if(result) {
       return tags.filter(item => item.indexOf(result[1]) > -1)
     } else {
@@ -85,18 +97,18 @@ class CommentForm extends React.Component {
   }
 
   assignUser(user) {
-    this.setState(state => ({text: state.text.replace(/@([a-zA-Z]*)$/g, `@${user} `), suggestions: []}));
+    this.setState(state => ({text: state.text.replace(findLastUsername, `@${user} `), suggestions: []}));
     this.commentInput.focus();
   }
 
   addTag(tag) {
-    this.setState(state => ({text: state.text.replace(/#([a-zA-Z]*)$/g, `#${tag} `), tagSuggestions: []}));
+    this.setState(state => ({text: state.text.replace(findLastTag, `#${tag} `), tagSuggestions: []}));
     this.commentInput.focus();
   }
 
   render() {
     return (
-      <Form>
+      <Form onSubmit={this.handleSubmit}>
         <Input innerRef={(input) => { this.commentInput = input; }}  onChange={this.handleChange} value={this.state.text}></Input>
         <Submit>post comment</Submit>
         {this.state.suggestions.length > 0 &&
@@ -114,7 +126,17 @@ class CommentForm extends React.Component {
 
 CommentForm.propTypes = {
   users: PropTypes.arrayOf(PropTypes.string),
-  tags: PropTypes.arrayOf(PropTypes.string)
+  tags: PropTypes.arrayOf(PropTypes.string),
+  addComment: PropTypes.func
 }
 
-export default CommentForm
+const mapStateToProps = (state) => ({
+  users: selectUsers(state),
+  tags: selectTags(state)
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  addComment: text => dispatch(addComment(text))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(CommentForm);

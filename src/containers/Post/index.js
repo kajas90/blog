@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { getPost, selectPost } from 'actions/postsActions';
 
-import { selectComments, selectUsers, selectTags } from '../../selectors/commentsSelector'
+import { selectComments } from '../../selectors/commentsSelector'
 
 import BoxElement from '../../components/BoxElement'
 import Comments from '../../components/Comments'
@@ -106,7 +106,7 @@ export class Post extends React.Component {
         </SinglePostWrapper>
         }
 
-        {this.state.showForm && <CommentForm users={users} tags={tags} />}
+        {this.state.showForm && <CommentForm />}
 
         {comments && <Comments comments={comments}/>}
 
@@ -129,18 +129,14 @@ Post.propTypes = {
     content: PropTypes.string,
   })),
   requestPosts: PropTypes.func,
-  closePost: PropTypes.func,
-  users: PropTypes.arrayOf(PropTypes.string),
-  tags: PropTypes.arrayOf(PropTypes.string)
+  closePost: PropTypes.func
 };
 
 
 const mapStateToProps = (state) => ({
   status: state.getIn(['post', 'status']),
   post: state.getIn(['post','data']).toJS(),
-  comments: selectComments(state, 0),
-  users: selectUsers(state),
-  tags: selectTags(state)
+  comments: selectComments(state, 0)
 });
 
 const mapDispatchToProps = (dispatch) => ({
