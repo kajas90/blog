@@ -22,4 +22,4 @@ Your application will run autmatically
 
 ## Application preview
 
-![alt text](https://www.dropbox.com/s/dpbhifngkyi2xoh/blog-preview.gif?dl=0)
+![alt text](https://dl.dropboxusercontent.com/content_link/eytd1wOIutCuAOtmBahFspuDoXqgnePq40WoSoCt94EGz6EadpHPV6mH6FTVws7m/file?dl=0&duc_id=X4UiPAykY2cXuruzXWRq8uw7vXjc088Q6i3J7L3sR1jUgZkO4aV1UwWUjQT6V0sB&raw=1&size=2048x1536&size_mode=3)
