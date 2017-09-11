@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components'
 
 import BoxElement from '../BoxElement'
-import { Pencil } from '../Icons'
+import { User } from '../Icons'
 
 const NoteAside = styled.aside`
   border-top: 1px solid #fafafa;
@@ -39,7 +39,7 @@ class PostItem extends React.Component {
       <PostBox onClick={this.handleClick} selected={selected}>
       {post.note}
       <NoteAside>
-        <Pencil height={10} width={10}/>
+        <User height={10} width={10}/>
         <Username>{post.username}</Username>
       </NoteAside>
     </PostBox>

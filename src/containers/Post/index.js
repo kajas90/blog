@@ -5,11 +5,12 @@ import { connect } from 'react-redux';
 
 import { getPost, selectPost } from 'actions/postsActions';
 
-import { selectComments } from '../../selectors/commentsSelector'
+import { selectComments, selectUsers } from '../../selectors/commentsSelector'
 
 import BoxElement from '../../components/BoxElement'
 import Comments from '../../components/Comments'
-import { Close, Pencil } from '../../components/Icons'
+import CommentForm from '../../components/CommentForm'
+import { Close, User, Pencil } from '../../components/Icons'
 
 const PageWrapper = styled.section`
   position: relative;
@@ -29,21 +30,47 @@ const PostHeader = styled.div`
   padding: 0 0 20px;
   margin: 0 0 20px;
   border-bottom: 1px solid #fafafa;
+  
+  & > .icon {
+    margin-right: 5px;
+  }
 `
 
 const PostDetails = styled.span`
   color: #D1345B;
 `
 
-const CloseButton = styled.button`
+const Button = styled.button`
   background: none;
   border: 0;
   margin-left: auto;
   outline: none;
   cursor: pointer;
+ 
+  & > svg {
+    margin-right: 5px;
+  }
+`
+
+const ActionsWrapper = styled.div`
+  border-top: 1px solid #fafafa;
+  padding: 10px 0 0;
+  margin-top: 10px;
+  font-size: 0.8em;
+  display: flex;
+  color: #34D1BF;
 `
 
 export class Post extends React.Component {
+
+  constructor() {
+    super()
+    this.showForm = this.showForm.bind(this)
+
+    this.state = {
+      showForm: false
+    }
+  }
 
   componentDidMount() {
     this.props.requestPost(this.props.id);
@@ -52,24 +79,35 @@ export class Post extends React.Component {
   componentWillReceiveProps(props) {
     if(props.id !== props.post.id) {
       this.props.requestPost(props.id);
+      this.state = { showForm: false }
     }
   }
 
+  showForm() {
+    this.setState(state => state.showForm = !state.showForm)
+  }
+
   render() {
-    const { post, comments, closePost } = this.props;
+    const { post, comments, closePost, users } = this.props;
     return (
       <PageWrapper>
         {post.note &&
         <SinglePostWrapper>
           <PostHeader>
             <PostDetails>
-              <Pencil width={12} /> {post.username}
+              <User width={12} height={12} /> {post.username}
             </PostDetails>
-            <CloseButton onClick={closePost}><Close width={20} height={20} /></CloseButton>
+            <Button onClick={closePost}><Close width={20} height={20} /></Button>
           </PostHeader>
           {post.note}
+          <ActionsWrapper>
+            <Button onClick={this.showForm} ><Pencil width={10} height={10} />Comment</Button>
+          </ActionsWrapper>
         </SinglePostWrapper>
         }
+
+        {this.state.showForm && <CommentForm users={users} />}
+
         {comments && <Comments comments={comments}/>}
 
       </PageWrapper>
@@ -91,13 +129,16 @@ Post.propTypes = {
     content: PropTypes.string,
   })),
   requestPosts: PropTypes.func,
-  closePost: PropTypes.func
+  closePost: PropTypes.func,
+  users: PropTypes.arrayOf(PropTypes.string)
 };
+
 
 const mapStateToProps = (state) => ({
   status: state.getIn(['post', 'status']),
   post: state.getIn(['post','data']).toJS(),
-  comments: selectComments(state, 0)
+  comments: selectComments(state, 0),
+  users: selectUsers(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

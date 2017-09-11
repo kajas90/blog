@@ -7,7 +7,7 @@ import { selectComments } from '../../selectors/commentsSelector'
 
 
 import Comments from '../../components/Comments'
-import { Pencil } from '../../components/Icons'
+import { User } from '../../components/Icons'
 
 
 const ItemWrapper = styled.div`
@@ -42,7 +42,7 @@ class Comment extends React.Component {
     const { comment, children } = this.props
     return (
       <ItemWrapper>
-        <UserLine><Pencil width={10} height={10} />{comment.author}</UserLine>
+        <UserLine><User width={10} height={10} />{comment.author}</UserLine>
         <Content>{comment.content}</Content>
       {children.length > 0 && <AnswersWrapper>
         <Comments comments={children} />
