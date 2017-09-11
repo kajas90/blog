@@ -42,10 +42,10 @@ export class Posts extends React.Component {
   }
 
   render() {
-    const { status, posts, selectPost } = this.props;
+    const { status, posts, selectPost, selectedPost } = this.props;
     return (
       <PageWrapper>
-        <PostsList posts={posts} selectPost={selectPost} />
+        <PostsList posts={posts} selectPost={selectPost} selected={selectedPost} />
         {status === 'loading' && <Loader><span>{status}</span></Loader>}
       </PageWrapper>
     );
@@ -60,11 +60,13 @@ Posts.propTypes = {
     username: PropTypes.string,
   })),
   selectPost: PropTypes.func,
+  selectedPost: PropTypes.number
 };
 
 const mapStateToProps = (state) => ({
   status: state.getIn(['posts','list','status']),
   posts: state.getIn(['posts','list','data']).toJS(),
+  selectedPost: state.getIn(['posts','selected'])
 
 });
 

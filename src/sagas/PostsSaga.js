@@ -1,9 +1,9 @@
-import { takeLatest, put, call } from 'redux-saga/effects';
+import { takeLatest, put, call, all } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 
-import { GET_POSTS } from 'actions/actionTypes'
+import { GET_POSTS, GET_POST } from 'actions/actionTypes'
 
-import { getPostsError, getPostsSuccess } from 'actions/postsActions'
+import { getPostsError, getPostsSuccess, getPostSuccess, getPostError } from 'actions/postsActions'
 
 
 export function* refreshPostsSaga() {
@@ -16,7 +16,17 @@ export function* refreshPostsSaga() {
   }
 }
 
+export function* getPostSaga(action) {
+  try {
+    const response = yield call(() => fetch(`http://localhost:3000/post?id=${action.id}`).then(response => response.json()));
+    yield put(getPostSuccess(response));
+  } catch ({ name, message, stack, status }) {
+    yield put(getPostError({ name, message, stack, status }));
+  }
+}
+
+
 
 export default function* PostsSaga() {
-  yield takeLatest(GET_POSTS, refreshPostsSaga);
+  yield all([takeLatest(GET_POSTS, refreshPostsSaga), takeLatest(GET_POST, getPostSaga)]);
 }

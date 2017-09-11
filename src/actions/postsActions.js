@@ -24,3 +24,13 @@ export const selectPost = id => ({
   type: types.SELECT_POST,
   id
 })
+
+export const getPostError = (error) => ({
+  type: types.GET_POST_ERROR,
+  error
+})
+
+export const getPostSuccess = (post) => ({
+  type: types.GET_POST_SUCCESS,
+  post
+})

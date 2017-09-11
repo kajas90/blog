@@ -18,6 +18,7 @@ export default {
   post: {
     data: {
       id: 0,
+      comments: []
     }
   }
 }

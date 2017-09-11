@@ -11,9 +11,9 @@ const PostsWrapper = styled.section`
   align-items: flex-start;
 `
 
-const PostsList = ({posts, selectPost}) =>
+const PostsList = ({posts, selectPost, selected }) =>
       <PostsWrapper>
-          {posts.map((post, index) => (<PostItem key={post.id+index} post={post} selectPost={selectPost} />))}
+          {posts.map((post, index) => (<PostItem key={post.id+index} post={post} selectPost={selectPost} selected={selected===post.id} />))}
       </PostsWrapper>
 
 PostsList.propTypes = {
@@ -23,6 +23,7 @@ PostsList.propTypes = {
     username: PropTypes.string,
   })),
   selectPost: PropTypes.func,
+  selected: PropTypes.number,
 }
 
 export default PostsList

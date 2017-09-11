@@ -29,7 +29,7 @@ MainPage.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  postSelected: state.getIn(['post','data','id']),
+  postSelected: state.getIn(['posts','selected'])
 });
 
 export default connect(mapStateToProps)(MainPage);

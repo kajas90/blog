@@ -4,6 +4,9 @@ import { fromJS } from 'immutable'
 
 const PostsReducer = (state = fromJS(initialState.posts), action) => {
   switch(action.type) {
+    case types.SELECT_POST:
+      return state
+        .setIn(['selected'], action.id);
     case types.GET_POSTS:
       return state.setIn(['list','status'], 'loading');
     case types.GET_POSTS_SUCCESS:

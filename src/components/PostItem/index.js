@@ -2,20 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components'
 
-const NoteWrapper = styled.article`
-  padding: 20px;
-  background: #ffffff;
-  -webkit-box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.4);
-  box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.4);
-  margin-bottom: 10px;
-  width: 100%;
-`
+import BoxElement from '../BoxElement'
+import { Pencil } from '../Icons'
 
 const NoteAside = styled.aside`
   border-top: 1px solid #fafafa;
   margin-top: 10px;
   padding: 5px 0 0 0;
   font-size: 0.8em;
+  color: #D1345B;
+  font-weight: bold;
+`
+
+const Username = styled.span`
+  margin-left: 5px;
+`
+
+const PostBox = BoxElement.extend`
+  ${props => props.selected ? 'border-bottom: 2px solid #34D1BF' : ''}
 `
 
 class PostItem extends React.Component {
@@ -30,13 +34,16 @@ class PostItem extends React.Component {
   }
 
   render() {
-    const {post} = this.props
-    return (<NoteWrapper onClick={this.handleClick}>
+    const {post, selected} = this.props
+    return (
+      <PostBox onClick={this.handleClick} selected={selected}>
       {post.note}
       <NoteAside>
-        {post.username}
+        <Pencil height={10} width={10}/>
+        <Username>{post.username}</Username>
       </NoteAside>
-    </NoteWrapper>)
+    </PostBox>
+    )
   }
 }
 
@@ -47,6 +54,7 @@ PostItem.propTypes = {
     username: PropTypes.string,
   }),
   selectPost: PropTypes.func,
+  selected: PropTypes.bool
 }
 
 export default PostItem

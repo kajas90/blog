@@ -6,6 +6,12 @@ const NavWrapper = styled.nav`
   
   & > * {
     margin: 0 10px;
+    color: #C0C5D6;
+    text-decoration: none;
+  }
+  
+  & > a:hover {
+    color: #D1345B;
   }
 `
 
