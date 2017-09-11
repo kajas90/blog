@@ -1,0 +1,38 @@
+{
+  "presets": [
+    "stage-1",
+    "react"
+  ],
+  "plugins": [
+    "transform-regenerator"
+  ],
+  "env": {
+    "development": {
+      "presets": [
+        "env",
+        "react-hmre"
+      ],
+      "plugins": [
+        "react-hot-loader/babel"
+      ]
+    },
+    "production": {
+      "presets": [
+        ["env", {
+          "es2015": {
+            "modules": false
+          }
+        }]
+      ],
+      "plugins": [
+        "transform-react-constant-elements",
+        "transform-react-remove-prop-types"
+      ]
+    },
+    "test": {
+      "presets": [
+        "env"
+      ]
+    }
+  }
+}
