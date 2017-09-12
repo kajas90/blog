@@ -22,4 +22,4 @@ Your application will run autmatically
 
 ## Application preview
 
-![alt text](https://ibb.co/eUeEGv)
+![alt text](https://image.ibb.co/bOT8bv/blog_preview.gif)
