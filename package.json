@@ -1,7 +1,7 @@
 {
-  "name": "react-quickstart",
+  "name": "blog",
   "version": "4.3.0",
-  "description": "React starter kit for single page web applications.",
+  "description": "My blog application",
   "scripts": {
     "preremove-demo": "npm run remove-dist",
     "remove-demo": "babel-node tools/removeDemo.js",
@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/blurbyte/react-quickstart"
+    "url": "https://github.com/kajas90/blog"
   },
   "keywords": [
     "react",
@@ -33,7 +33,6 @@
     "webpack2",
     "redux-saga"
   ],
-  "author": "blurbyte",
   "license": "MIT",
   "engines": {
     "node": ">=6"
